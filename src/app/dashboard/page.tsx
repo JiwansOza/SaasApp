@@ -3,11 +3,11 @@
 import Link from "next/link";
 import { useAppContext } from "@/context/AppContext";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import PerformanceCard from "@/components/PerformanceCard";
 import CredentialInput from "@/components/CredentialInput";
 
-export default function DashboardPage() {
+function DashboardContent() {
     const { user, isLoggedIn, purchasedApps, getAppMetadata } = useAppContext();
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -261,5 +261,17 @@ export default function DashboardPage() {
                 </Link>
             </div>
         </div>
+    );
+}
+
+export default function DashboardPage() {
+    return (
+        <Suspense fallback={
+            <div className="flex items-center justify-center min-h-screen">
+                <div className="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
+            </div>
+        }>
+            <DashboardContent />
+        </Suspense>
     );
 }
