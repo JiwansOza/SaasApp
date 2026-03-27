@@ -126,6 +126,19 @@ const defaultMetadata: AppMetadata = {
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
+const getURL = () => {
+    let url =
+        process.env.NEXT_PUBLIC_SITE_URL ?? // Set this to your main domain in Vercel
+        process.env.NEXT_PUBLIC_VERCEL_URL ?? // Automatically set by Vercel for preview deployments
+        (typeof window !== "undefined" ? window.location.origin : "http://localhost:3000");
+
+    // Make sure to include `https://` when not localhost.
+    url = url.includes("http") ? url : `https://${url}`;
+    // Make sure to include a trailing `/`.
+    url = url.charAt(url.length - 1) === "/" ? url : `${url}/`;
+    return url;
+};
+
 export function AppProvider({ children }: { children: ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
     const [purchasedApps, setPurchasedApps] = useState<App[]>([]);
@@ -231,7 +244,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         const { error } = await supabase.auth.signInWithOAuth({
             provider: 'google',
             options: {
-                redirectTo: window.location.origin + '/dashboard',
+                redirectTo: `${getURL()}dashboard`,
             },
         });
         if (error) throw error;
