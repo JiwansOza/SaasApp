@@ -177,36 +177,36 @@ export default function AdminPage() {
     };
 
     return (
-        <div className="page-transition max-w-7xl mx-auto px-6 py-12">
+        <div className="page-transition max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-12">
             {/* Header */}
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-12">
                 <div>
-                    <h1 className="text-3xl md:text-[36px] font-bold text-gray-900 tracking-tight mb-1">Admin Dashboard</h1>
-                    <p className="text-[14px] text-gray-500">Manage marketplace applications</p>
+                    <h1 className="text-[28px] md:text-[36px] font-black text-[#1d1d1f] tracking-tighter mb-1.5">Admin Dashboard</h1>
+                    <p className="text-[14px] text-[#86868b] font-medium">Manage marketplace applications</p>
                 </div>
                 <button
                     onClick={() => setShowAddModal(true)}
-                    className="px-5 py-2.5 rounded-full text-[13px] font-medium text-white bg-gray-900 hover:bg-gray-800 transition-all btn-press shadow-md shadow-gray-900/10 flex items-center gap-2"
+                    className="w-full sm:w-auto px-6 py-3 rounded-full text-[14px] font-black text-white bg-[#1d1d1f] hover:bg-black transition-all btn-press shadow-lg shadow-black/5 flex items-center justify-center gap-2.5"
                 >
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                    <svg className="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 4v16m8-8H4" />
                     </svg>
                     Add New App
                 </button>
             </div>
 
             {/* Stats Overview */}
-            <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-12">
                 {[
                     { label: "Total Apps", value: adminApps.length, icon: "📦" },
                     { label: "Published", value: adminApps.filter((a) => a.status === "Published").length, icon: "🟢" },
                     { label: "Drafts", value: adminApps.filter((a) => a.status === "Draft").length, icon: "📝" },
                     { label: "Revenue (Demo)", value: `₹${adminApps.reduce((sum, a) => sum + a.price, 0).toLocaleString()}`, icon: "💰" },
                 ].map((stat) => (
-                    <div key={stat.label} className="bg-white rounded-2xl border border-black/[0.04] p-5 shadow-xs hover:shadow-md transition-all duration-300">
-                        <div className="text-xl mb-1">{stat.icon}</div>
-                        <div className="text-[24px] font-bold text-gray-900 tracking-tight">{stat.value}</div>
-                        <div className="text-[12px] text-gray-400 font-medium">{stat.label}</div>
+                    <div key={stat.label} className="bg-white rounded-[24px] border border-black/[0.04] p-6 shadow-sm hover:shadow-xl transition-all duration-300 group">
+                        <div className="text-2xl mb-3 group-hover:scale-110 transition-transform origin-left">{stat.icon}</div>
+                        <div className="text-[26px] font-black text-[#1d1d1f] tracking-tighter">{stat.value}</div>
+                        <div className="text-[12px] text-[#86868b] font-bold uppercase tracking-widest mt-1">{stat.label}</div>
                     </div>
                 ))}
             </div>
@@ -236,12 +236,12 @@ export default function AdminPage() {
                 <div className="overflow-x-auto">
                     <table className="w-full">
                         <thead>
-                            <tr className="border-b border-gray-50">
-                                <th className="text-left px-6 py-3 text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Application</th>
-                                <th className="text-left px-6 py-3 text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Category</th>
-                                <th className="text-left px-6 py-3 text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Price</th>
-                                <th className="text-left px-6 py-3 text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Status</th>
-                                <th className="text-right px-6 py-3 text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Actions</th>
+                            <tr className="border-b border-gray-50 bg-gray-50/30">
+                                <th className="text-left px-6 py-4 text-[11px] font-black text-[#86868b] uppercase tracking-[0.1em] whitespace-nowrap">Application</th>
+                                <th className="text-left px-6 py-4 text-[11px] font-black text-[#86868b] uppercase tracking-[0.1em] whitespace-nowrap">Category</th>
+                                <th className="text-left px-6 py-4 text-[11px] font-black text-[#86868b] uppercase tracking-[0.1em] whitespace-nowrap">Price</th>
+                                <th className="text-left px-6 py-4 text-[11px] font-black text-[#86868b] uppercase tracking-[0.1em] whitespace-nowrap">Status</th>
+                                <th className="text-right px-6 py-4 text-[11px] font-black text-[#86868b] uppercase tracking-[0.1em] whitespace-nowrap">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-50">

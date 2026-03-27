@@ -28,27 +28,27 @@ export default function AppCard({ app, featured = false }: AppCardProps) {
     };
 
     return (
-        <div className="relative group/card">
-            <Link href={isPurchased ? `/customize/${app.id}` : `/apps/${app.id}`} className="block">
+        <div className="relative group/card h-full">
+            <Link href={isPurchased ? `/customize/${app.id}` : `/apps/${app.id}`} className="block h-full">
                 <div
-                    className={`bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-black/[0.03] relative ${featured ? "p-0" : ""}`}
+                    className={`bg-white rounded-[24px] md:rounded-[32px] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-black/[0.03] relative group h-full flex flex-col ${featured ? "p-0" : ""}`}
                 >
                     {/* Purchased Badge */}
                     {isPurchased && (
-                        <div className="absolute top-4 right-4 z-10 px-3 py-1.5 rounded-full bg-[#1d1d1f] text-white text-[10px] font-black uppercase tracking-widest shadow-xl animate-in fade-in zoom-in duration-500">
+                        <div className="absolute top-4 left-4 z-10 px-3 py-1.5 rounded-full bg-[#1d1d1f] text-white text-[10px] font-black uppercase tracking-widest shadow-xl animate-in fade-in zoom-in duration-500">
                             Purchased
                         </div>
                     )}
                     
                     {/* Actions Overlay */}
-                    <div className="absolute top-4 right-4 z-20 flex flex-col gap-2">
+                    <div className="absolute top-4 right-4 z-20 flex flex-col gap-2 translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300">
                         {/* Wishlist Button */}
                         {!isPurchased && (
                             <button
                                 onClick={handleWishlistClick}
                                 className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${isWishlisted 
                                     ? "bg-rose-500 text-white shadow-lg shadow-rose-500/20 scale-110" 
-                                    : "bg-white/90 backdrop-blur-md text-gray-400 hover:text-rose-500 hover:scale-110 shadow-sm"
+                                    : "bg-white/80 backdrop-blur-xl text-gray-400 hover:text-rose-500 hover:scale-110 shadow-sm border border-white/20"
                                 }`}
                             >
                                 <svg className={`w-5 h-5 ${isWishlisted ? "fill-current" : "fill-none"}`} viewBox="0 0 24 24" stroke="currentColor">
@@ -60,7 +60,7 @@ export default function AppCard({ app, featured = false }: AppCardProps) {
                         {/* Preview Button */}
                         <button
                             onClick={handlePreviewClick}
-                            className="w-10 h-10 rounded-full bg-white/90 backdrop-blur-md text-gray-400 hover:text-indigo-600 hover:scale-110 shadow-sm flex items-center justify-center transition-all duration-300"
+                            className="w-10 h-10 rounded-full bg-white/80 backdrop-blur-xl text-gray-400 hover:text-indigo-600 hover:scale-110 shadow-sm flex items-center justify-center transition-all duration-300 border border-white/20"
                             title="Interactive Preview"
                         >
                             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -72,45 +72,59 @@ export default function AppCard({ app, featured = false }: AppCardProps) {
 
                     {/* Preview area */}
                     <div
-                        className={`${featured ? "h-56" : "h-44"} bg-[#f5f5f7] flex items-center justify-center relative overflow-hidden`}
+                        className={`${featured ? "h-64" : "h-48"} bg-[#f5f5f7] flex items-center justify-center relative overflow-hidden transition-all duration-700 group-hover:bg-[#f0f0f2]`}
                     >
                         {/* Subtle background pattern */}
-                        <div className="absolute inset-0 opacity-[0.02]" style={{
+                        <div className="absolute inset-0 opacity-[0.03]" style={{
                             backgroundImage: "radial-gradient(circle at 1px 1px, #000 1px, transparent 0)",
-                            backgroundSize: "32px 32px"
+                            backgroundSize: "24px 24px"
                         }} />
                         
-                        {/* Animated gradient blob */}
-                        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-indigo-500/5 blur-[100px] rounded-full animate-pulse" />
-                        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-purple-500/5 blur-[100px] rounded-full animate-pulse delay-700" />
+                        {/* Animated gradient blobs - more vibrant */}
+                        <div className="absolute -top-1/4 -left-1/4 w-[150%] h-[150%] bg-gradient-to-br from-indigo-500/10 via-purple-500/10 to-pink-500/10 blur-[80px] rounded-full animate-pulse group-hover:scale-110 transition-transform duration-1000" />
+                        
+                        {/* Shimmer overlay */}
+                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 shadow-[inset_0_0_100px_rgba(255,255,255,0.5)] pointer-events-none" 
+                             style={{
+                                 background: "linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.3) 50%, transparent 75%)",
+                                 backgroundSize: "200% 200%",
+                                 animation: "shimmer 3s infinite linear"
+                             }} />
 
-                        <img
-                            src={app.icon}
-                            alt={app.name}
-                            className={`${featured ? "w-28 h-28" : "w-24 h-24"} rounded-[22px] object-cover shadow-2xl group-hover:shadow-indigo-500/20 transition-all duration-700 group-hover:scale-110 group-hover:rotate-2`}
-                        />
+                        <div className="relative">
+                            {/* Reflection effect */}
+                            <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-48 h-12 bg-black/5 blur-2xl rounded-full scale-y-50 opacity-0 group-hover:opacity-40 transition-opacity duration-700" />
+                            
+                            <img
+                                src={app.icon}
+                                alt={app.name}
+                                className={`${featured ? "w-32 h-32" : "w-24 h-24"} rounded-[26px] object-cover shadow-[0_20px_50px_rgba(0,0,0,0.1)] group-hover:shadow-[0_30px_60px_rgba(79,70,229,0.25)] transition-all duration-700 group-hover:scale-[1.05] group-hover:-rotate-2 border border-black/[0.03] relative z-10`}
+                            />
+                        </div>
                     </div>
 
                     {/* Content */}
-                    <div className="p-6">
-                        <div className="flex items-start justify-between gap-3 mb-2">
+                    <div className="p-5 md:p-7 flex-1 flex flex-col">
+                        <div className="flex items-start justify-between gap-3 mb-2.5">
                             <h3
-                                className={`font-black text-[#1d1d1f] group-hover:text-indigo-600 transition-colors duration-300 tracking-tight ${featured ? "text-[19px]" : "text-[17px]"}`}
+                                className={`font-black text-[#1d1d1f] tracking-tight group-hover:text-indigo-600 transition-colors duration-300 ${featured ? "text-[19px] md:text-[21px]" : "text-[16px] md:text-[18px]"}`}
                             >
                                 {app.name}
                             </h3>
                         </div>
 
-                        <p className="text-[13.5px] text-[#86868b] leading-relaxed mb-5 line-clamp-2 font-medium">
+                        <p className="text-[14px] text-[#86868b] leading-relaxed mb-6 line-clamp-2 font-medium tracking-tight">
                             {app.shortDescription}
                         </p>
+
+                        <div className="flex-1" />
 
                         {/* Tags */}
                         <div className="flex flex-wrap gap-2 mb-6">
                             {app.tags.slice(0, 3).map((tag) => (
                                 <span
                                     key={tag}
-                                    className="px-3 py-1 text-[10px] font-bold text-[#1d1d1f] bg-[#f5f5f7] rounded-full uppercase tracking-widest border border-black/[0.02]"
+                                    className="px-3.5 py-1.5 text-[10px] font-bold text-[#4b4b4b] bg-black/[0.04] rounded-full uppercase tracking-widest border border-white/50 backdrop-blur-sm"
                                 >
                                     {tag}
                                 </span>
@@ -118,16 +132,20 @@ export default function AppCard({ app, featured = false }: AppCardProps) {
                         </div>
 
                         {/* Price & CTA */}
-                        <div className="flex items-center justify-between pt-4 border-t border-black/[0.03]">
-                            <span className="text-xl font-black text-[#1d1d1f] tracking-tighter">
-                                ₹{app.price}
-                            </span>
-                            <span className="text-[13px] font-black text-indigo-600 group-hover:text-indigo-700 transition-all flex items-center gap-1.5 uppercase tracking-wider">
+                        <div className="flex items-center justify-between pt-5 border-t border-black/[0.05]">
+                            <div className="flex flex-col">
+                                <span className="text-[10px] uppercase tracking-widest font-black text-[#86868b] mb-0.5">Starting from</span>
+                                <span className="text-2xl font-black text-[#1d1d1f] tracking-tighter">
+                                    ₹{app.price}
+                                </span>
+                            </div>
+                            
+                            <div className="h-11 px-6 rounded-2xl bg-[#1d1d1f] text-white text-[13px] font-black uppercase tracking-wider hover:bg-black transition-all duration-300 hover:scale-[1.05] active:scale-[0.98] shadow-lg shadow-black/10 hover:shadow-black/20 flex items-center gap-2">
                                 {isPurchased ? "Customize" : "Details"}
                                 <svg className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                                 </svg>
-                            </span>
+                            </div>
                         </div>
                     </div>
                 </div>

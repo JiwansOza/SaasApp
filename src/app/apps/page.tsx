@@ -49,27 +49,27 @@ export default function AppsPage() {
     };
 
     return (
-        <div className="page-transition max-w-7xl mx-auto px-6 py-12">
+        <div className="page-transition max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-12">
             {/* Header */}
             <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
                 <div>
-                    <h1 className="text-3xl md:text-[36px] font-bold text-gray-900 tracking-tight mb-2">
-                        {showWishlistOnly ? "My Wishlist" : "All Applications"}
+                    <h1 className="text-[28px] md:text-[34px] font-black text-[#1d1d1f] tracking-tight mb-2">
+                        {showWishlistOnly ? "My Wishlist" : "App Marketplace"}
                     </h1>
-                    <p className="text-[15px] text-gray-500">
+                    <p className="text-[17px] text-[#86868b] font-medium leading-relaxed">
                         {showWishlistOnly 
-                            ? "Your saved applications for later" 
-                            : "Browse our collection of Unity-based SaaS applications"}
+                            ? "Your curated collection of saved applications" 
+                            : "Discover and customize premium Unity-based SaaS solutions."}
                     </p>
                 </div>
                 
                 {/* Sort Dropdown */}
-                <div className="flex items-center gap-3 bg-white border border-black/[0.06] rounded-xl px-4 py-2 shadow-xs group hover:border-black/[0.1] transition-all">
-                    <span className="text-[12px] font-bold text-gray-400 uppercase tracking-widest">Sort by</span>
+                <div className="flex items-center gap-3 bg-white border border-black/[0.05] rounded-2xl px-5 py-2.5 shadow-sm group hover:border-black/[0.1] hover:shadow-md transition-all duration-300">
+                    <span className="text-[11px] font-black text-[#86868b] uppercase tracking-widest">Sort by</span>
                     <select 
                         value={sortBy}
                         onChange={(e) => setSortBy(e.target.value)}
-                        className="bg-transparent text-[14px] font-bold text-gray-900 outline-none cursor-pointer"
+                        className="bg-transparent text-[14px] font-bold text-[#1d1d1f] outline-none cursor-pointer"
                     >
                         <option value="newest">Newest First</option>
                         <option value="price-low">Price: Low to High</option>
@@ -81,21 +81,21 @@ export default function AppsPage() {
             {/* Search & Filters */}
             <div className="flex flex-col md:flex-row gap-4 mb-10">
                 {/* Search */}
-                <div className="relative flex-1">
+                <div className="relative flex-1 group">
                     <svg
-                        className="absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-gray-400"
+                        className="absolute left-5 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-[#86868b] group-focus-within:text-indigo-500 transition-colors"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
                     >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                     <input
                         type="text"
                         placeholder="Search applications..."
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        className="w-full pl-11 pr-4 py-2.5 rounded-xl bg-white border border-black/[0.06] text-[14px] focus:outline-none focus:ring-2 focus:ring-indigo-500/15 focus:border-indigo-300/50 transition-all shadow-xs"
+                        className="w-full pl-12 pr-6 py-3.5 rounded-2xl bg-white border border-black/[0.05] text-[15px] font-medium text-[#1d1d1f] focus:outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500/30 transition-all shadow-sm placeholder:text-[#86868b]/60"
                     />
                 </div>
 
@@ -139,7 +139,7 @@ export default function AppsPage() {
 
             {/* Grid */}
             {filtered.length > 0 ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                     {filtered.map((app) => (
                         <AppCard key={app.id} app={app} />
                     ))}
