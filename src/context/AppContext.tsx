@@ -9,6 +9,7 @@ interface User {
     id: string;
     email: string;
     name: string;
+    avatarUrl?: string;
     isAdmin: boolean;
 }
 
@@ -180,9 +181,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
                     id: session.user.id,
                     email: session.user.email!,
                     name: session.user.user_metadata?.full_name || session.user.email!.split("@")[0],
+                    avatarUrl: session.user.user_metadata?.avatar_url,
                     isAdmin: isAdmin
                 });
-                fetchUserData(session.user.id);
+                fetchUserData(session.user);
             } else {
                 setUser(null);
                 setPurchasedApps([]);
@@ -194,7 +196,18 @@ export function AppProvider({ children }: { children: ReactNode }) {
         return () => subscription.unsubscribe();
     }, []);
 
-    const fetchUserData = async (userId: string) => {
+    const fetchUserData = async (supabaseUser: SupabaseUser) => {
+        const userId = supabaseUser.id;
+
+        // Ensure profile exists (Sync for existing users or metadata updates)
+        await supabase.from('profiles').upsert({
+            id: userId,
+            full_name: supabaseUser.user_metadata?.full_name || supabaseUser.email!.split("@")[0],
+            avatar_url: supabaseUser.user_metadata?.avatar_url,
+            email: supabaseUser.email,
+            updated_at: new Date().toISOString()
+        }, { onConflict: 'id' });
+
         // Fetch purchased apps
         const { data: purchases } = await supabase
             .from('purchased_apps')

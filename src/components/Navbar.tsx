@@ -61,8 +61,16 @@ export default function Navbar() {
                     {isLoggedIn ? (
                         <div className="flex items-center gap-5">
                             <div className="flex items-center gap-3 px-2 py-1.5 rounded-full hover:bg-black/[0.03] transition-all cursor-pointer group active:scale-95">
-                                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-[11px] font-black shadow-md group-hover:scale-110 transition-transform ring-2 ring-white">
-                                    {user?.name?.charAt(0)?.toUpperCase() || "U"}
+                                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-[11px] font-black shadow-md group-hover:scale-110 transition-transform ring-2 ring-white overflow-hidden">
+                                    {user?.avatarUrl ? (
+                                        <img 
+                                            src={user.avatarUrl} 
+                                            alt={user.name} 
+                                            className="w-full h-full object-cover"
+                                        />
+                                    ) : (
+                                        user?.name?.charAt(0)?.toUpperCase() || "U"
+                                    )}
                                 </div>
                                 <span className="text-[14px] font-bold text-[#1d1d1f] pr-1">
                                     {user?.name}
