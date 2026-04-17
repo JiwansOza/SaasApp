@@ -905,7 +905,7 @@ export default function CustomizePage() {
                             <div className="w-full aspect-video bg-white rounded-[12px] overflow-hidden relative flex flex-col shadow-inner">
                                 {/* App Content based on Current Step */}
                                 <div
-                                    className="flex-1 flex flex-col items-center justify-center relative p-12 lg:p-24 transition-all duration-1000 ease-out"
+                                    className="flex-1 flex flex-col items-center justify-center relative p-8 lg:p-12 transition-all duration-1000 ease-out"
                                     style={{
                                         backgroundImage: (currentStep === 3 && settings.quizBgImage) ? `url(${settings.quizBgImage})` : 
                                                         (currentStep === 2 && settings.regBgImage) ? `url(${settings.regBgImage})` : 
@@ -992,10 +992,10 @@ export default function CustomizePage() {
                                         {/* QUIZ PREVIEW */}
                                         {currentStep === 3 && (
                                             <div
-                                                className="w-full max-w-3xl p-14 rounded-[48px] shadow-2xl transition-all duration-500 animate-in fade-in slide-in-from-right-8"
+                                                className="w-full max-w-3xl p-8 rounded-[32px] shadow-2xl transition-all duration-500 animate-in fade-in slide-in-from-right-8"
                                                 style={{ backgroundColor: settings.quizCardColor }}
                                             >
-                                                <div className="flex items-center justify-between mb-12">
+                                                <div className="flex items-center justify-between mb-6">
                                                     <div
                                                         className="px-4 py-2 rounded-xl text-white text-[11px] font-black uppercase tracking-widest shadow-lg"
                                                         style={{ backgroundColor: settings.quizElementColor }}
@@ -1007,13 +1007,13 @@ export default function CustomizePage() {
                                                     </div>
                                                 </div>
 
-                                                <h2 className="text-[28px] font-black text-gray-900 mb-10 leading-tight">
+                                                <h2 className="text-[22px] font-black text-gray-900 mb-6 leading-tight">
                                                     Which of these defines the "SaaS" model?
                                                 </h2>
 
-                                                <div className="grid grid-cols-2 gap-5 mb-12">
+                                                <div className="grid grid-cols-2 gap-3 mb-6">
                                                     {["On-premise", "Cloud-based", "Hybrid", "Local"].map((opt, i) => (
-                                                        <div key={opt} className={`px-8 py-5 rounded-2xl border-2 text-[14px] font-bold ${i === 1 ? "border-indigo-500 bg-indigo-50/30 text-indigo-600" : "border-gray-100 text-gray-400"}`}>
+                                                        <div key={opt} className={`px-6 py-3.5 rounded-2xl border-2 text-[13px] font-bold ${i === 1 ? "border-indigo-500 bg-indigo-50/30 text-indigo-600" : "border-gray-100 text-gray-400"}`}>
                                                             {opt}
                                                         </div>
                                                     ))}
@@ -1021,7 +1021,7 @@ export default function CustomizePage() {
 
                                                 <div className="flex justify-end">
                                                     <button
-                                                        className="px-14 py-4 rounded-2xl text-white font-black text-[15px] shadow-xl hover:opacity-90 transition-all"
+                                                        className="px-10 py-3 rounded-2xl text-white font-black text-[14px] shadow-xl hover:opacity-90 transition-all"
                                                         style={{ backgroundColor: settings.quizElementColor }}
                                                     >
                                                         {settings.quizButtonText}
