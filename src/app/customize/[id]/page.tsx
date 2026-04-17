@@ -95,7 +95,7 @@ export default function CustomizePage() {
                 {/* Sidebar Editor */}
                 <div className="w-[400px] border-r border-black/[0.03] bg-white flex flex-col shadow-[20px_0_40px_rgba(0,0,0,0.01)] z-10 overflow-hidden">
                     {/* Sidebar Header */}
-                    <div className="p-8 border-b border-black/[0.03] flex items-center justify-between group bg-white/80 backdrop-blur-2xl">
+                    <div className="p-8 border-b border-black/[0.03] flex items-center justify-between group bg-white/80 backdrop-blur-2xl shrink-0">
                         <div className="flex items-center gap-4">
                             <Link href="/dashboard" className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-[#86868b] hover:text-[#1d1d1f] transition-all hover:bg-gray-100 active:scale-90 border border-black/[0.03]">
                                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -810,7 +810,7 @@ export default function CustomizePage() {
                     </div>
 
                     {/* Sidebar Footer */}
-                    <div className="p-6 border-t border-black/[0.04] space-y-3">
+                    <div className="p-6 border-t border-black/[0.04] space-y-3 shrink-0">
                         {currentStep < steps.length - 1 ? (
                             <button
                                 onClick={nextStep}
